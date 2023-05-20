@@ -1,23 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
-   static int total=0;
+   static double total=0;
    static String firstName ="";
-   static String LastName ="";
-   static CartItem[] cartItems ;
-   public void calc_Total() {
+   static String lastName ="";
+   static String invoice ="";
+   static List<CartItem> cartItems =new ArrayList() ;
+   public static void calc_total() {
 	   int totalPrice=0;
-	   for (int i=0;i<cartItems.length;i++)
+	   for (int i=0;i<cartItems.size();i++)
 	   {
-		   totalPrice+=cartItems[i].price;
+		   totalPrice+=cartItems.get(i).price;
 	   }
 	   total=totalPrice;
    }
-   public void add_cart_item() {
-	   
+   public static void create_invoice() {
+	   for(int i=0;i<User.cartItems.size();i++)
+	   {
+		   invoice+= User.cartItems.get(i).name+"   x"+User.cartItems.get(i).quantaty+"\n";
+	   }
    }
 }
-class CartItem{
-	int price;
-	String Name;
-	int quantaty;
-}
+

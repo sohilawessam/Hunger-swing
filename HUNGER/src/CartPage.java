@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextPane;
@@ -12,13 +14,18 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class CartPage extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField firstNameField;
 	private JTextField lastNameField;
-	private JTextField adressField;
+	private JTextField codeField;
 
 	/**
 	 * Launch the application.
@@ -49,101 +56,189 @@ public class CartPage extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("HUN");
-		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 50));
-		lblNewLabel.setForeground(new Color(254, 114, 76));
-		lblNewLabel.setBounds(447, 11, 114, 64);
-		contentPane.add(lblNewLabel);
+		JLabel firstLogoLable = new JLabel("HUN");
+		firstLogoLable.setFont(new Font("SansSerif", Font.BOLD, 50));
+		firstLogoLable.setForeground(new Color(254, 114, 76));
+		firstLogoLable.setBounds(447, 11, 114, 64);
+		contentPane.add(firstLogoLable);
 		
-		JLabel lblGer = new JLabel("GER");
-		lblGer.setForeground(new Color(254, 114, 76));
-		lblGer.setFont(new Font("SansSerif", Font.BOLD, 50));
-		lblGer.setBounds(447, 66, 114, 64);
-		contentPane.add(lblGer);
+		JLabel secoundLogoLable = new JLabel("GER");
+		secoundLogoLable.setForeground(new Color(254, 114, 76));
+		secoundLogoLable.setFont(new Font("SansSerif", Font.BOLD, 50));
+		secoundLogoLable.setBounds(447, 66, 114, 64);
+		contentPane.add(secoundLogoLable);
 		
-		JTextPane cartItemsPanel = new JTextPane();
-		cartItemsPanel.setFont(new Font("Segoe UI", Font.BOLD, 15));
-		cartItemsPanel.setText("lol");
-		cartItemsPanel.setEditable(false);
-		cartItemsPanel.setBackground(new Color(215, 215, 215));
-		cartItemsPanel.setBounds(290, 144, 430, 156);
-		contentPane.add(cartItemsPanel);
+		JTextPane invoicePanel = new JTextPane();
+		invoicePanel.setText(User.invoice);		
+		invoicePanel.setFont(new Font("Segoe UI", Font.BOLD, 15));
+		invoicePanel.setEditable(false);
+		invoicePanel.setBackground(new Color(215, 215, 215));
+		invoicePanel.setBounds(290, 144, 430, 156);
+		contentPane.add(invoicePanel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Invoice:");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1.setForeground(new Color(255, 197, 41));
-		lblNewLabel_1.setBounds(292, 120, 72, 22);
-		contentPane.add(lblNewLabel_1);
+		JLabel invoiceLabel = new JLabel("Invoice:");
+		invoiceLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		invoiceLabel.setForeground(new Color(255, 197, 41));
+		invoiceLabel.setBounds(292, 120, 72, 22);
+		contentPane.add(invoiceLabel);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("First name:");
-		lblNewLabel_1_1.setForeground(new Color(255, 197, 41));
-		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1_1.setBounds(290, 306, 72, 22);
-		contentPane.add(lblNewLabel_1_1);
+		JLabel firstNameLabel = new JLabel("First name:");
+		firstNameLabel.setForeground(new Color(255, 197, 41));
+		firstNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		firstNameLabel.setBounds(290, 306, 72, 22);
+		contentPane.add(firstNameLabel);
+		
 		
 		firstNameField = new JTextField();
 		firstNameField.setBounds(290, 326, 204, 20);
 		contentPane.add(firstNameField);
 		firstNameField.setColumns(10);
 		
-		JLabel lblNewLabel_1_1_1 = new JLabel("Last name:");
-		lblNewLabel_1_1_1.setForeground(new Color(255, 197, 41));
-		lblNewLabel_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1_1_1.setBounds(516, 306, 72, 22);
-		contentPane.add(lblNewLabel_1_1_1);
+		JLabel lastNameLabel = new JLabel("Last name:");
+		lastNameLabel.setForeground(new Color(255, 197, 41));
+		lastNameLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lastNameLabel.setBounds(516, 306, 72, 22);
+		contentPane.add(lastNameLabel);
 		
 		lastNameField = new JTextField();
 		lastNameField.setColumns(10);
 		lastNameField.setBounds(516, 326, 204, 20);
 		contentPane.add(lastNameField);
 		
-		JLabel lblNewLabel_1_1_2 = new JLabel("Coupon:");
-		lblNewLabel_1_1_2.setForeground(new Color(255, 197, 41));
-		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_1_1_2.setBounds(290, 349, 72, 22);
-		contentPane.add(lblNewLabel_1_1_2);
+		JLabel couponLabel = new JLabel("Coupon:");
+		couponLabel.setForeground(new Color(255, 197, 41));
+		couponLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		couponLabel.setBounds(290, 349, 72, 22);
+		contentPane.add(couponLabel);
 		
-		adressField = new JTextField();
-		adressField.setColumns(10);
-		adressField.setBounds(290, 369, 114, 20);
-		contentPane.add(adressField);
+		codeField = new JTextField();
+		codeField.setColumns(10);
+		codeField.setBounds(290, 369, 114, 20);
+		contentPane.add(codeField);
 		
-		JPanel checkoutButton = new JPanel();
+		final JPanel checkoutButton = new JPanel();
+		
 		checkoutButton.setBackground(new Color(255, 197, 41));
 		checkoutButton.setBounds(290, 447, 430, 38);
 		contentPane.add(checkoutButton);
 		checkoutButton.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_2 = new JLabel("CHECKOUT");
-		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 25));
-		lblNewLabel_2.setForeground(new Color(39, 45, 47));
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		checkoutButton.add(lblNewLabel_2);
+		JLabel checkoutLabel = new JLabel("CHECKOUT");
+		checkoutLabel.setFont(new Font("SansSerif", Font.BOLD, 25));
+		checkoutLabel.setForeground(new Color(39, 45, 47));
+		checkoutLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		checkoutButton.add(checkoutLabel);
 		
-		JPanel checkoutButton_1 = new JPanel();
-		checkoutButton_1.setBackground(new Color(254, 114, 76));
-		checkoutButton_1.setBounds(426, 369, 65, 22);
-		contentPane.add(checkoutButton_1);
-		checkoutButton_1.setLayout(new BorderLayout(0, 0));
+		final JPanel applyCoponButton = new JPanel();
 		
-		JLabel lblNewLabel_3 = new JLabel("APPLY");
-		lblNewLabel_3.setForeground(new Color(255, 255, 255));
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		checkoutButton_1.add(lblNewLabel_3, BorderLayout.CENTER);
+		applyCoponButton.setBackground(new Color(254, 114, 76));
+		applyCoponButton.setBounds(426, 369, 65, 22);
+		contentPane.add(applyCoponButton);
+		applyCoponButton.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_4 = new JLabel("TOTAL:");
-		lblNewLabel_4.setFont(new Font("SansSerif", Font.BOLD, 25));
-		lblNewLabel_4.setForeground(new Color(255, 255, 255));
-		lblNewLabel_4.setBounds(516, 369, 103, 29);
-		contentPane.add(lblNewLabel_4);
+		JLabel applyLabel = new JLabel("APPLY");
+		applyLabel.setForeground(new Color(255, 255, 255));
+		applyLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		applyLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		applyCoponButton.add(applyLabel, BorderLayout.CENTER);
 		
-		JLabel TotalText = new JLabel("250 EGP");
-		TotalText.setHorizontalAlignment(SwingConstants.CENTER);
-		TotalText.setForeground(new Color(254, 114, 76));
-		TotalText.setFont(new Font("SansSerif", Font.BOLD, 25));
-		TotalText.setBounds(606, 369, 114, 29);
-		contentPane.add(TotalText);
+		JLabel totalButton = new JLabel("TOTAL:");
+		totalButton.setFont(new Font("SansSerif", Font.BOLD, 25));
+		totalButton.setForeground(new Color(255, 255, 255));
+		totalButton.setBounds(516, 369, 103, 29);
+		contentPane.add(totalButton);
+		
+		final JLabel totalText = new JLabel();
+		totalText.setText(User.total+" EGP");
+		totalText.setForeground(new Color(254, 114, 76));
+		totalText.setFont(new Font("SansSerif", Font.BOLD, 25));
+		totalText.setBounds(606, 369, 185, 29);
+		contentPane.add(totalText);
+		
+		
+		
+		
+		
+		
+		
+		applyCoponButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				 String copoun;
+					
+					copoun=codeField.getText().toString();
+					
+			if(Globals.coupons.containsKey(copoun))
+			{
+			  double disscount=Globals.coupons.get(copoun)/100;
+			  User.total=User.total-User.total*disscount;
+			  totalText.setText(User.total+" EGP");
+			  totalText.repaint();
+			  totalText.revalidate();
+				
+			}
+			
+			}
+			 @Override
+				public void mouseEntered(MouseEvent e) {
+				 applyCoponButton.setBackground(new Color(171,76,52));
+				}
+				@Override
+				public void mouseExited(MouseEvent e) {
+					applyCoponButton.setBackground(new Color(254,114,76));
+				}
+			
+			
+		});
+		
+		checkoutButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+				  
+				 
+				User.firstName=firstNameField.getText().toString();
+				User.lastName=lastNameField.getText().toString();
+				File f1=new File("C:\\Users\\Sohila\\git\\Hunger-swing\\HUNGER\\orders\\"+User.firstName+" " +User.lastName +".txt");
+				if(!f1.exists());
+				try
+				{
+					f1.createNewFile();
+					
+				}
+				catch(IOException e1)
+				{
+					JOptionPane.showMessageDialog(null, "error");
+				}
+				try
+				{
+					PrintWriter w=new PrintWriter(f1);
+					String printedInvoice = User.invoice+"\r\n Total: "+User.total+" EGP";
+					w.println(printedInvoice);
+					w.close();
+					JOptionPane.showMessageDialog(null, "order set succsessfully!");
+					
+				}
+				catch(IOException e6)
+				{
+					JOptionPane.showMessageDialog(null, "error");
+				}
+				
+				
+				
+				
+				
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				checkoutButton.setBackground(new Color(193,150,31));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				checkoutButton.setBackground(new Color(255,197,41));
+			}
+		});
+		
 		
 
 	}
