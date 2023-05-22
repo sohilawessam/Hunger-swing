@@ -69,6 +69,7 @@ public class HomePage {
 	 */
 	private void initialize() {
 		frame = new JFrame("HUNGER");
+		frame.setResizable(false);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Sohila\\git\\Hunger-swing\\HUNGER\\images\\logo.png"));
 		frame.getContentPane().setBackground(new Color(215, 215, 215));
 		frame.setBackground(new Color(255, 255, 255));
@@ -346,7 +347,7 @@ public class HomePage {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						boolean itemChecker=false;
-						int ckeckerNumber;
+						int ckeckerNumber=0 ;
 						
 						for(int i=0;i<User.cartItems.size();i++)
 						{
@@ -360,7 +361,7 @@ public class HomePage {
 						
 						if (itemChecker)
 						{
-							User.cartItems.get(index).quantaty++;
+							User.cartItems.get(ckeckerNumber).quantaty++;
 						}
 						else {
 							User.cartItems.add(new CartItem(Globals.listItems[index].name,Globals.listItems[index].price,Globals.listItems[index].id,1));
