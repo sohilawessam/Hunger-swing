@@ -33,4 +33,5 @@ public class Globals {
 	
 	public static Map<String,Double> coupons= Collections.singletonMap("off20", 20.0);
 	
+	
 }

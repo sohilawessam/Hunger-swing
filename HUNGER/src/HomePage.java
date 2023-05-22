@@ -318,7 +318,7 @@ public class HomePage {
 				final JPanel itemImagePanel = new JPanel();
 				
 				
-				itemPanel1.add(itemImagePanel, "name_317068623113200");
+				itemPanel1.add(itemImagePanel);
 				itemImagePanel.setLayout(new BorderLayout(0, 0));
 				
 				JLabel itemImage = new JLabel("");
@@ -347,7 +347,7 @@ public class HomePage {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						boolean itemChecker=false;
-						int ckeckerNumber=0 ;
+						int ckeckerNumber=0;
 						
 						for(int i=0;i<User.cartItems.size();i++)
 						{

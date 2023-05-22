@@ -6,12 +6,12 @@ public class User {
    static String firstName ="";
    static String lastName ="";
    static String invoice ="";
-   static List<CartItem> cartItems =new ArrayList() ;
+   static List<CartItem> cartItems =new ArrayList() ;//array feh l haga l na dftha ll cart
    public static void calc_total() {
 	   int totalPrice=0;
 	   for (int i=0;i<cartItems.size();i++)
 	   {
-		   totalPrice+=cartItems.get(i).price;
+		   totalPrice+=cartItems.get(i).price*cartItems.get(i).quantaty;
 	   }
 	   total=totalPrice;
    }
